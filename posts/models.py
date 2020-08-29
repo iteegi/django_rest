@@ -7,3 +7,6 @@ class Posts(models.Model):
     url = models.URLField()
     poster = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        orderin = ['-created']
