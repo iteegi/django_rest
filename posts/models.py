@@ -16,3 +16,10 @@ class Posts(models.Model):
         """Additional settings for the Posts model."""
 
         orderin = ['-created']
+
+
+class Vote(models.Model):
+    """Model for voices."""
+
+    voter = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE)
