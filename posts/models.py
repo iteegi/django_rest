@@ -15,7 +15,7 @@ class Posts(models.Model):
     class Meta:
         """Additional settings for the Posts model."""
 
-        orderin = ['-created']
+        ordering = ['-created']
 
 
 class Vote(models.Model):
