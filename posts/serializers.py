@@ -1,7 +1,7 @@
 """Serializers for Posts models."""
 
 from rest_framework import serializers
-from .models import Posts
+from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -10,7 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         """Additional settings for the PostSerializer class."""
 
-        model = Posts
+        model = Post
         fields = ['id',
                   'title',
                   'url',

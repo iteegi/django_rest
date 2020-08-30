@@ -2,12 +2,12 @@
 
 from rest_framework import generics
 
-from .models import Posts
+from .models import Post
 from .serializers import PostSerializer
 
 
 class PostList(generics.ListAPIView):
     """View for a list of all posts."""
 
-    queryset = Posts.objects.all()
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
