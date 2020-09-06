@@ -1,7 +1,7 @@
 """Serializers for Posts models."""
 
 from rest_framework import serializers
-from .models import Post
+from .models import Post, Vote
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -20,4 +20,15 @@ class PostSerializer(serializers.ModelSerializer):
                   'poster',
                   'poster_id',
                   'created',
+                  ]
+
+
+class VoteSerializer(serializers.ModelSerializer):
+    """Serializer for votes models."""
+
+    class Meta:
+        """Additional settings for the VoteSerializer class."""
+
+        model = Vote
+        fields = ['id',
                   ]
