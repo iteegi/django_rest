@@ -1,6 +1,7 @@
 """Views for Posts app."""
 
 from rest_framework import generics, permissions
+from rest_framework.exceptions import ValidationError
 
 from .models import Post, Vote
 from .serializers import PostSerializer, VoteSerializer
@@ -39,5 +40,7 @@ class VoteCreate(generics.CreateAPIView):
 
         Called by CreateModelMixin.
         """
+        if self.get_queryset().exists():
+            raise ValidationError('You have already voted for this post!')
         serializer.save(voter=self.request.user,
                         post=Post.objects.get(pk=self.kwargs['pk'])
