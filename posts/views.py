@@ -33,3 +33,11 @@ class VoteCreate(generics.CreateAPIView):
         user = self.request.user
         post = Post.objects.get(pk=self.kwargs['pk'])
         return Vote.objects.filter(voter=user, post=post)
+
+    def perform_create(self, serializer):
+        """Override save behavior.
+
+        Called by CreateModelMixin.
+        """
+        serializer.save(voter=self.request.user,
+                        post=Post.objects.get(pk=self.kwargs['pk'])
