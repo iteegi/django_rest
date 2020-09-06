@@ -11,3 +11,7 @@ class PostList(generics.ListCreateAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def perform_create(self, serializer):
+        """Override save behavior."""
+        serializer.save(poster=self.request.user)
