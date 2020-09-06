@@ -7,6 +7,9 @@ from .models import Post
 class PostSerializer(serializers.ModelSerializer):
     """Serializer for posts models."""
 
+    poster = serializers.ReadOnlyField(source='poster.username')
+    poster_id = serializers.ReadOnlyField(source='poster.id')
+
     class Meta:
         """Additional settings for the PostSerializer class."""
 
@@ -15,5 +18,6 @@ class PostSerializer(serializers.ModelSerializer):
                   'title',
                   'url',
                   'poster',
+                  'poster_id',
                   'created',
                   ]
