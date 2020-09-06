@@ -2,7 +2,7 @@
 
 from rest_framework import generics, permissions
 
-from .models import Post
+from .models import Post, Vote
 from .serializers import PostSerializer, VoteSerializer
 
 
@@ -27,3 +27,9 @@ class VoteCreate(generics.CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = VoteSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        """Override the initial queryset."""
+        user = self.request.user
+        post = Post.objects.get(pk=self.kwargs['pk'])
+        return Vote.objects.filter(voter=user, post=post)
