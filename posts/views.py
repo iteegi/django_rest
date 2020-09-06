@@ -6,7 +6,7 @@ from .models import Post
 from .serializers import PostSerializer
 
 
-class PostList(generics.ListAPIView):
+class PostList(generics.ListCreateAPIView):
     """View for a list of all posts."""
 
     queryset = Post.objects.all()
