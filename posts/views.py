@@ -1,6 +1,6 @@
 """Views for Posts app."""
 
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, mixins
 from rest_framework.exceptions import ValidationError
 
 from .models import Post, Vote
@@ -22,7 +22,7 @@ class PostList(generics.ListCreateAPIView):
         serializer.save(poster=self.request.user)
 
 
-class VoteCreate(generics.CreateAPIView):
+class VoteCreate(generics.CreateAPIView, mixins.DestroyModelMixin):
     """View to vote for a specific post."""
 
     queryset = Post.objects.all()
