@@ -23,6 +23,23 @@ class PostList(generics.ListCreateAPIView):
         serializer.save(poster=self.request.user)
 
 
+class PostRetrieveDestroy(generics.RetrieveDestroyAPIView):
+    """View for a list of all posts."""
+
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def delete(self, request, *args, **kwargs):
+        """Delete post."""
+        post = Post.objects.filter(pk=kwargs['pk'],
+                                   poster=self.request.user)
+        if post.exists():
+            return self.destroy(request, *args, **kwargs)
+        else:
+            raise ValidationError('This isn\'t you post to delete.')
+
+
 class VoteCreate(generics.CreateAPIView, mixins.DestroyModelMixin):
     """View to vote for a specific post."""
 
